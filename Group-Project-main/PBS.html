@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arts & Communication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #c2c2cc7c;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-weight: 600;
+            color: #0e0e0e;
+        }
+
+        /* Header */
+       .header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    background: linear-gradient(to top, #002f87, #1A6AFF);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+        .header h1 {
+            font-size: 3em;
+            color: rgb(255, 253, 253);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Layout */
+        .content-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .schedules {
+            flex: 1;
+            background: rgb(239, 238, 238);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(213, 212, 212, 0.912);
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .courses-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+        }
+        .course-block:hover, .career-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background: #06a2f0d4;
+        }
+        .courses-section, .careers-section {
+            padding: 20px;
+            background: (239, 238, 238);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .course-block, .career-card {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-left: 5.5px solid #1a73e8;
+            margin-bottom: 18px;
+        }
+
+        .course-item {
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .course-item h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .course-content {
+            margin: 10px 0;
+        }
+
+        .course-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Ensures title and plus icon are spaced appropriately */
+        }
+
+        .period {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        /* New style for highlighted 5th period */
+        .fifth-period {
+            background-color: #ffff9c;
+        }
+/*-------------------------Copy below for confetti------------------------------------- */
+        /* Overlay Styles */
+        .overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            overflow-y: scroll;
+          }
+/*-------------------------Copy above for confetti------------------------------------- */
+
+        .overlay-content {
+            background-color: rgb(255, 255, 255);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 1000px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .overlay-close {
+            color: #ea0c0c;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .overlay-close:hover {
+            color: #1A6AFF;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        .home-button {
+        position: absolute;
+        top: 70px;
+        left: 70px; /* Distance from the left */
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        opacity: 80%;
+        border-radius: 50%; /* Makes the button circular */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        text-decoration: none; /* Removes underline for links */
+        z-index: 1000; /* Ensures it's above other elements */
+        transition: transform 0.2s ease;
+        }
+
+        .home-button:hover {
+         transform: scale(1.2);
+         cursor: pointer; /* Changes cursor to pointer */
+        }
+
+        .home-icon {
+            width: 60%;
+            height: 60%;
+        }
+
+        /* Header Links Container */
+        .header-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Individual Header Links */
+        .header-link {
+            text-decoration: none;
+            color: white;
+            background-color: #db0032;;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-link:hover {
+            transform: scale(1.2);
+            background-color: #8331a7;;
+        }
+
+        .green-plus {
+            color: #28a745; /* Green color */
+            font-size: 1.5em;
+            cursor: pointer;
+            padding-left: 10px;
+            transition: transform 0.3s ease, color 0.3s ease; /* Smooth transitions for transform and color */
+        }
+
+        .green-plus:hover {
+            transform: scale(1.2); /* Gently enlarges the icon */
+            color: #218838; /* Optional: Slightly darkens the green color on hover */
+        }
+
+        /* Cart Icon Styling */
+
+        .cart-icon {
+        position: absolute;
+        top: 70px;
+        right: 70px; /* Distance from the left */
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        opacity: 80%;
+        border-radius: 50%; /* Makes the button circular */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        text-decoration: none; /* Removes underline for links */
+        z-index: 1000; /* Ensures it's above other elements */
+        transition: transform 0.2s ease;
+        }
+
+        .cart-icon img {
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);
+         width:60%;
+         height:60%;
+        }
+
+        .cart-icon:hover {
+         transform: scale(1.2);
+         cursor: pointer; /* Changes cursor to pointer */
+        }
+/*-------------------------Copy below for confetti------------------------------------- */
+
+        .confetti {
+            position: fixed; /* Ensure the confetti is fixed on the screen */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100; /* Ensure this is above all other elements */
+            pointer-events: none; /* Prevent confetti from interfering with interactions */
+        }
+
+        .confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f39c12;
+            animation: confetti 1.5s ease-in-out infinite;
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+/*-------------------------Copy above for confetti------------------------------------- */
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="home-button">
+    <img src="https://static.thenounproject.com/png/1407802-200.png" alt="Home" class="home-icon">
+    </a>
+    
+    <div class="header">
+        <h1>Public Service Network</h1>
+        <div class="header-links">
+            <a href="A&C.html" class="header-link">Arts</a>
+            <a href="A&NR.html" class="header-link">Agriculture</a>
+            <a href="MD&PS.html" class="header-link">Medical</a>
+            <a href="ETI.html" class="header-link">Engineering</a>
+            <a href="innovation.html" class="header-link">Innovation</a>
+            <a href="business.html" class="header-link">Business</a>
+        </div>
+    </div>
+    <div id="cart-icon" class="cart-icon">
+        <a href="CC.html">
+            <img src="https://banner2.cleanpng.com/20180426/jxq/avez1anz5.webp" alt="Cart"/>
+        </a>
+
+    </div>
+    <div class="content-container">
+    
+        <!-- Rest of the document remains unchanged -->
+        <!-- (Courses, Careers, Overlays, and Script sections are identical to the original) -->
+        
+        <!-- Full original right section content goes here -->
+        <div class="courses-container">
+            <div class="courses-section">
+                <h2>Networks</h2>
+                
+                <div class="course-block" onclick="openOverlay('broadcast-overlay')">
+                    <h3>Education Careers</h3>
+                    <p>This course introduces students to animal health care, covering anatomy, common veterinary practices, and hands-on experience in labs and field trips.</p>
+                </div>
+
+                <div class="course-block" onclick="openOverlay('digital-media-overlay')">
+                    <h3>Cosmetology</h3>
+                    <p>Students explore the scientific foundations of agriculture, engaging in hands-on activities related to soil health, plant biology, and animal science.</p>
+                </div>
+
+                <div class="course-block" onclick="openOverlay('av-production-overlay')">
+                    <h3>Law Enforcement</h3>
+                    <p>This course covers the components of agricultural systems, including crop production and livestock management, emphasizing their environmental and economic impacts.</p>
+                </div>
+                <div class="course-block" onclick="openOverlay('av-production-overlay')">
+                    <h3>Pre-Law</h3>
+                    <p>Students examine sustainability principles globally, focusing on environmental, economic, and social issues, and explore solutions for climate change and resource management.</p>
+                </div>
+                <div class="course-block" onclick="openOverlay('av-production-overlay')">
+                    <h3>Psychology</h3>
+                    <p>Students examine sustainability principles globally, focusing on environmental, economic, and social issues, and explore solutions for climate change and resource management.</p>
+                </div>
+                <div class="course-block" onclick="openOverlay('av-production-overlay')">
+                    <h3>Goverment & Public Administration</h3>
+                    <p>Students examine sustainability principles globally, focusing on environmental, economic, and social issues, and explore solutions for climate change and resource management.</p>
+                </div>
+                <div class="course-block" onclick="openOverlay('av-production-overlay')">
+                    <h3>Culinary</h3>
+                    <p>Students examine sustainability principles globally, focusing on environmental, economic, and social issues, and explore solutions for climate change and resource management.</p>
+                </div>
+            </div>
+
+            <div class="careers-section">
+                <h2>Unique Career Paths</h2>
+                
+                <div class="career-card">
+                    <h3>Social Worker $71,497/year</h3>
+                    <p> The help individuals, families, and communities find ways to recover from substance use.  </p>
+                </div>
+
+                <div class="career-card">
+                    <h3>Urban Planner $75,950/year</h3>
+                    <p>Knowns as city or town planners, design and develop cities and towns.</p>
+                    </p>
+                </div>
+
+                <div class="career-card">
+                    <h3>Public Policy Analyst $98,215/year. 
+                        </h3>
+                    <p> To identify current or impending problems, create solutions, and evaluate other proposed solutions.</p>
+                </div>
+
+                <div class="career-card">
+                    <h3>Community Outreach Coordinator $56,118/year </h3>
+                    <p>Builds and maintains relationships between an organization and the community it serves.</p>
+                </div>
+
+                <div class="career-card">
+                    <h3>Non-profit Manager $48,851/year</h3>
+                    <p>The management of an organization based on charitable works or policy instead of making a profit.</p>
+                </div>
+                <div class="career-card">
+                    <h3>Emergency Management Director $83,960/year</h3>
+                    <p>The planning and leading of responses to emergencies and disasters, such as natural disasters, wartime situations, or technological emergencies.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlays remain the same as original document -->
+    <div id="broadcast-overlay" class="overlay">
+        <div class="overlay-content">
+            <span class="overlay-close" onclick="closeOverlay('broadcast-overlay')">&times;</span>
+            <h2>Education Careers</h2>
+            <p></p>
+            <ul>
+                <li>Principals of Teaching
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+                <li>Child and Adolescent Development
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+                <li>Teaching and Learning
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="digital-media-overlay" class="overlay">
+        <div class="overlay-content">
+            <span class="overlay-close" onclick="closeOverlay('digital-media-overlay')">&times;</span>
+            <h2>Cosmetology</h2>
+            <p>In-depth exploration of multimedia content creation, including:</p>
+            <ul>
+                <li>Principles of Barbering and Cosmetology
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+                <li>Barbering and Costmetology Fundamentals
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+                <li>Adv. Cosmetology
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="av-production-overlay" class="overlay">
+        <div class="overlay-content">
+            <span class="overlay-close" onclick="closeOverlay('av-production-overlay')">&times;</span>
+            <h2>Law Enforcement</h2>
+            <p>Hands-on course focusing on professional media production:</p>
+            <ul>
+                <li>Principles of Criminal Education
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+                <li>Law Enforcement Fundamentals
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+                <li>Correctionsm and Correctional Awarness
+                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                </li>
+            </ul>
+        </div>
+    <div id="av-production-overlay" class="overlay">
+            <div class="overlay-content">
+                <span class="overlay-close" onclick="closeOverlay('av-production-overlay')">&times;</span>
+                <h2> Pre-Law</h2>
+                <p>Hands-on course focusing on professional media production:</p>
+                <ul>
+                    <li>Law Education
+                    <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                    </li>
+                    <li>Ap Language and Composition
+                    <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                    </li>
+                    <li>ACP Gov/We the People
+                    <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                    </li>
+            
+                </ul>
+            </div>
+    <div id="av-production-overlay" class="overlay">
+                <div class="overlay-content">
+                    <span class="overlay-close" onclick="closeOverlay('av-production-overlay')">&times;</span>
+                    <h2> Psychology</h2>
+                    <p>Hands-on course focusing on professional media production:</p>
+                    <ul>
+                        <li>Sociology or Physcology
+                        <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                        </li>
+                        <li>AP Statistics
+                        <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                        </li>
+                        <li>AP/ACP/IB Psychology or DC Anatomy
+                        <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                        </li>
+                
+                    </ul>
+                </div>
+    <div id="av-production-overlay" class="overlay">
+                    <div class="overlay-content">
+                        <span class="overlay-close" onclick="closeOverlay('av-production-overlay')">&times;</span>
+                        <h2> Goverment & Public Administration</h2>
+                        <p>Hands-on course focusing on professional media production:</p>
+                        <ul>
+                            <li>ACP Business</li>
+                            <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                            <li>AP Macro/AP Micro or AP Statistics</li>
+                            <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                            <li>ACP Speech/AP Gov</li>
+                            <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                    
+                        </ul>
+                    </div>
+    <div id="av-production-overlay" class="overlay">
+                        <div class="overlay-content">
+                            <span class="overlay-close" onclick="closeOverlay('av-production-overlay')">&times;</span>
+                            <h2> Culinary </h2>
+                            <p>Hands-on course focusing on professional media production:</p>
+                            <ul>
+                                <li>Principles of Culinary and Hospitality</li>
+                                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                                <li>Nutrition</li>
+                                <span class="green-plus" onclick="toggleClass(this)"> <div class="green-plus" onclick="celebrate()">+</div></span>
+                                <li>Culinary Art</li>
+                                
+                        
+                            </ul>
+                        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script> <!-- Confetti library -->
+<script>
+
+    function openOverlay(overlayId) {
+        document.getElementById(overlayId).style.display = 'block';
+    }
+
+    function closeOverlay(overlayId) {
+        document.getElementById(overlayId).style.display = 'none';
+    }
+
+    // Close overlay if user clicks outside of it
+    window.onclick = function(event) {
+        if (event.target.classList.contains('overlay')) {
+            event.target.style.display = 'none';
+        }
+    }
+
+    // Function to toggle class and update button
+    function toggleClass(button) {
+        const className = button.parentElement.textContent.trim(); // Get class name from the li text
+        let currentClasses = JSON.parse(localStorage.getItem('classes')) || [];
+
+        // Toggle the class in the list
+        if (currentClasses.includes(className)) {
+            currentClasses = currentClasses.filter(c => c !== className);
+            button.textContent = ' +'; // Change button text to "+"
+        } else {
+            currentClasses.push(className);
+            button.textContent = ' -'; // Change button text to "-"
+            celebrate();
+        }
+
+        // Update localStorage with the new classes list
+        localStorage.setItem('classes', JSON.stringify(currentClasses));
+    }
+
+    // Update all buttons on page load
+    window.onload = function() {
+        let currentClasses = JSON.parse(localStorage.getItem('classes')) || [];
+
+        // Loop through all li elements and update their buttons
+        const listItems = document.querySelectorAll('ul li');
+        listItems.forEach(item => {
+            const className = item.textContent.trim(); // Get class name from the li text
+            const button = item.querySelector('.green-plus');
+
+            // Update the button text depending on whether the class is in localStorage
+            if (currentClasses.includes(className)) {
+                button.textContent = ' -';
+            } else {
+                button.textContent = ' +';
+            }
+        });
+    };
+//--------------------------Copy below for confetti--------------------------------------//
+    
+    function celebrate() {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { x: 0.5, y: 0.5 }
+        });
+    }
+//--------------------------Copy above for confetti--------------------------------------//
+    
+
+</script>
+</body>
+</html>

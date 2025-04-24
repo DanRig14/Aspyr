@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arts & Communication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #c2c2cc7c;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-weight: 600;
+            color: #0e0e0e;
+        }
+
+        /* Header */
+       .header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    background: linear-gradient(to top, #002f87, #1A6AFF);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+        .header h1 {
+            font-size: 3em;
+            color: rgb(255, 253, 253);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Layout */
+        .content-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .schedules {
+            flex: 1;
+            background: rgb(239, 238, 238);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(213, 212, 212, 0.912);
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .courses-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+        }
+        .course-block:hover, .career-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background: #06a2f0d4;
+        }
+        .courses-section, .careers-section {
+            padding: 20px;
+            background: (239, 238, 238);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .course-block, .career-card {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-left: 5.5px solid #1a73e8;
+            margin-bottom: 18px;
+        }
+
+        .course-item {
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .course-item h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .course-content {
+            margin: 10px 0;
+        }
+
+        .course-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Ensures title and plus icon are spaced appropriately */
+        }
+
+        .period {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        /* New style for highlighted 5th period */
+        .fifth-period {
+            background-color: #ffff9c;
+        }
+/*-------------------------Copy below for confetti------------------------------------- */
+        /* Overlay Styles */
+        .overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            overflow-y: scroll;
+          }
+/*-------------------------Copy above for confetti------------------------------------- */
+
+        .overlay-content {
+            background-color: rgb(255, 255, 255);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 1000px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .overlay-close {
+            color: #ea0c0c;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .overlay-close:hover {
+            color: #1A6AFF;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        .home-button {
+        position: absolute;
+        top: 70px;
+        left: 70px; /* Distance from the left */
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        opacity: 80%;
+        border-radius: 50%; /* Makes the button circular */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        text-decoration: none; /* Removes underline for links */
+        z-index: 1000; /* Ensures it's above other elements */
+        transition: transform 0.2s ease;
+        }
+
+        .home-button:hover {
+         transform: scale(1.2);
+         cursor: pointer; /* Changes cursor to pointer */
+        }
+
+        .home-icon {
+            width: 60%;
+            height: 60%;
+        }
+
+        /* Header Links Container */
+        .header-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Individual Header Links */
+        .header-link {
+            text-decoration: none;
+            color: white;
+            background-color: #db0032;;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-link:hover {
+            transform: scale(1.2);
+            background-color: #8331a7;;
+        }
+
+        .green-plus {
+            color: #28a745; /* Green color */
+            font-size: 1.5em;
+            cursor: pointer;
+            padding-left: 10px;
+            transition: transform 0.3s ease, color 0.3s ease; /* Smooth transitions for transform and color */
+        }
+
+        .green-plus:hover {
+            transform: scale(1.2); /* Gently enlarges the icon */
+            color: #218838; /* Optional: Slightly darkens the green color on hover */
+        }
+
+        /* Cart Icon Styling */
+
+        .cart-icon {
+        position: absolute;
+        top: 70px;
+        right: 70px; /* Distance from the left */
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        opacity: 80%;
+        border-radius: 50%; /* Makes the button circular */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        text-decoration: none; /* Removes underline for links */
+        z-index: 1000; /* Ensures it's above other elements */
+        transition: transform 0.2s ease;
+        }
+
+        .cart-icon img {
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);
+         width:60%;
+         height:60%;
+        }
+
+        .cart-icon:hover {
+         transform: scale(1.2);
+         cursor: pointer; /* Changes cursor to pointer */
+        }
+/*-------------------------Copy below for confetti------------------------------------- */
+
+        .confetti {
+            position: fixed; /* Ensure the confetti is fixed on the screen */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100; /* Ensure this is above all other elements */
+            pointer-events: none; /* Prevent confetti from interfering with interactions */
+        }
+
+        .confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f39c12;
+            animation: confetti 1.5s ease-in-out infinite;
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+/*-------------------------Copy above for confetti------------------------------------- */
+    </style>
+</head>
+<body>
+<a href="index.html" class="home-button">
+    <img src="https://static.thenounproject.com/png/1407802-200.png" alt="Home" class="home-icon">
+</a>
+
+<div class="header">
+    <h1>Arts & Communication</h1>
+    <div class="header-links">
+        <a href="A&NR.html" class="header-link">Agriculture</a>
+        <a href="MD&PS.html" class="header-link">Medical</a>
+        <a href="PBS.html" class="header-link">Public Service</a>
+        <a href="ETI.html" class="header-link">Engineering</a>
+        <a href="innovation.html" class="header-link">Innovation</a>
+        <a href="business.html" class="header-link">Business</a>
+    </div>
+</div>
+<!-- Cart Icon in the top right -->
+<div id="cart-icon" class="cart-icon">
+    <a href="CC.html">
+        <img src="https://banner2.cleanpng.com/20180426/jxq/avez1anz5.webp" alt="Cart" />
+    </a>
+</div>
+
+
+    <!-- Rest of the document remains unchanged -->
+    <!-- (Courses, Careers, Overlays, and Script sections are identical to the original) -->
+
+    <!-- Full original right section content goes here -->
+    <div class="courses-container">
+        <div class="courses-section">
+            <h2>Networks</h2>
+
+            <div class="course-block" onclick="openOverlay('broadcast-overlay')">
+                <h3>Broadcasting & Production</h3>
+                <p>Learn fundamentals of media production for TV, radio, and digital platforms. Master camera work, sound editing, and video production techniques.</p>
+            </div>
+
+            <div class="course-block" onclick="openOverlay('digital-media-overlay')">
+                <h3>Arts & Performance</h3>
+                <p>Create and edit multimedia content, develop digital storytelling skills, and learn industry-standard software for content creation.</p>
+            </div>
+
+            <div class="course-block" onclick="openOverlay('av-production-overlay')">
+                <h3>Journalism</h3>
+                <p>Hands-on experience with professional equipment, live production techniques, and advanced editing software.</p>
+            </div>
+        </div>
+
+        <div class="careers-section">
+            <h2>Unique Career Paths</h2>
+
+            <div class="career-card">
+                <h3>Content Strategist $93,586/year</h3>
+                <p>Develops and manages content plans for brands, analyzing data to determine what content will resonate with audiences and planning distribution across various platforms.</p>
+            </div>
+
+            <div class="career-card">
+                <h3>UX/UI Sound Designer $83,833/year</h3>
+                <p>Creates audio feedback and sound effects for apps, websites, and digital products to enhance user experience and brand identity.</p>
+            </div>
+
+            <div class="career-card">
+                <h3>Virtual Production Director $107,478/year</h3>
+                <p>Manages real-time 3D environments for film and TV production, combining traditional filmmaking with game engine technology.</p>
+            </div>
+
+            <div class="career-card">
+                <h3>Immersive Experience Designer $83,000/year</h3>
+                <p>Creates interactive experiences using AR/VR technology for entertainment, education, and commercial applications.</p>
+            </div>
+
+            <div class="career-card">
+                <h3>Digital Ethics Officer $121,800/year</h3>
+                <p>Ensures content and media productions follow ethical guidelines, privacy regulations, and maintain social responsibility in the digital age.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Broadcast Overlay -->
+<div id="broadcast-overlay" class="overlay">
+    <div class="overlay-content">
+        <span class="overlay-close" onclick="closeOverlay('broadcast-overlay')">&times;</span>
+        <h2>Broadcasting & Production</h2>
+        <div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Principals of Broadcasting</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Description about the principles of broadcasting. This is where you explain what this course covers.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Digital Media</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Description about digital media. Provide details about the content and objectives of this course.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Audio/Visual Production or Student Media: Broadcast</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Details about Audio/Visual Production and broadcast media. Include key topics covered in this course.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Mass Media Production</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Mass Media Production course description. Highlight the main objectives and skills students will learn.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Digital Media Overlay -->
+<div id="digital-media-overlay" class="overlay">
+    <div class="overlay-content">
+        <span class="overlay-close" onclick="closeOverlay('digital-media-overlay')">&times;</span>
+        <h2>Arts and Performance</h2>
+        <div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Principles of Broadcasting</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Description about the principles of broadcasting. This is where you explain what this course covers.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>ACP Speech</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Description about ACP Speech. Provide details about the content and objectives of this course.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Adv. Band/Orchestra/Art/Theatre</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Details about advanced band, orchestra, art, or theatre. Include key topics and objectives covered in this course.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- AV Production Overlay -->
+<div id="av-production-overlay" class="overlay">
+    <div class="overlay-content">
+        <span class="overlay-close" onclick="closeOverlay('av-production-overlay')">&times;</span>
+        <h2>Journalism</h2>
+        <div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Principles of Business Management</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Description about Principles of Business Management. Provide an overview of the objectives and topics covered in this course.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>ACP Speech</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Description about ACP Speech. Provide details about the content and learning goals of this course.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="course-item">
+                <div class="course-item-header">
+                    <h3>Newspaper/Yearbook</h3>
+                    <span class="green-plus" onclick="toggleClass(this)">+</span>
+                </div>
+                <div class="course-content">
+                    <p>Description about Newspaper/Yearbook. Highlight the key skills and activities involved in this course.</p>
+                    <video controls>
+                        <source src="path-to-your-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--------------------------Copy below for confetti-------------------------------------->
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script> <!-- Confetti library -->
+<!-------------------------Copy above for confetti-------------------------------------->
+
+<script>
+
+    function openOverlay(overlayId) {
+        document.getElementById(overlayId).style.display = 'block';
+    }
+
+    function closeOverlay(overlayId) {
+        document.getElementById(overlayId).style.display = 'none';
+    }
+
+    // Close overlay if user clicks outside of it
+    window.onclick = function(event) {
+        if (event.target.classList.contains('overlay')) {
+            event.target.style.display = 'none';
+        }
+    }
+
+    // Function to toggle class and update button
+    function toggleClass(button) {
+        const className = button.parentElement.textContent.trim(); // Get class name from the li text
+        let currentClasses = JSON.parse(localStorage.getItem('classes')) || [];
+
+        // Toggle the class in the list
+        if (currentClasses.includes(className)) {
+            currentClasses = currentClasses.filter(c => c !== className);
+            button.textContent = ' +'; // Change button text to "+"
+        } else {
+            currentClasses.push(className);
+            button.textContent = ' -'; // Change button text to "-"
+            celebrate();
+        }
+
+        // Update localStorage with the new classes list
+        localStorage.setItem('classes', JSON.stringify(currentClasses));
+    }
+
+    // Update all buttons on page load
+    window.onload = function() {
+        let currentClasses = JSON.parse(localStorage.getItem('classes')) || [];
+
+        // Loop through all li elements and update their buttons
+        const listItems = document.querySelectorAll('ul li');
+        listItems.forEach(item => {
+            const className = item.textContent.trim(); // Get class name from the li text
+            const button = item.querySelector('.green-plus');
+
+            // Update the button text depending on whether the class is in localStorage
+            if (currentClasses.includes(className)) {
+                button.textContent = ' -';
+            } else {
+                button.textContent = ' +';
+            }
+        });
+    };
+//--------------------------Copy below for confetti--------------------------------------//
+
+    function celebrate() {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { x: 0.5, y: 0.5 }
+        });
+    }
+//--------------------------Copy above for confetti--------------------------------------//
+
+
+</script>
+</body>
+</html>

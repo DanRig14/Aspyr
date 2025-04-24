@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diploma Pathways</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        color: #1f1f1f;
+        background-color: #b1b1b1;
+    }
+
+    /* Sidebar styles */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100vh;
+        background-color: #002f87;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo-button {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.75rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .logo-button span {
+        color: white;
+    }
+
+    header nav {
+        width: 100%;
+    }
+
+    header nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    header nav li {
+        position: relative;
+        padding-left: 1rem;
+    }
+
+    header nav a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        position: relative;
+        display: inline-block;
+        padding: 0.5rem 0;
+    }
+
+    header nav a::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #db0032;
+        transition: width 0.3s ease;
+        box-shadow: 0 0 10px #db0032;
+    }
+
+    header nav a:hover::before {
+        width: 100%;
+    }
+
+    /* Main content styles */
+    .content-container {
+        margin-left: 250px;
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .pdf-link {
+        display: inline-block;
+        width: 80%;
+        max-width: 400px;
+        padding: 1.25rem;
+        background: linear-gradient(135deg, #d20808, #ff1f1f);
+        color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(210, 8, 8, 0.3);
+        transition: all 0.3s ease;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .pdf-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(210, 8, 8, 0.4);
+        background: linear-gradient(135deg, #ff1f1f, #d20808);
+    }
+  </style>
+</head>
+<body>
+<header>
+    <a href="index.html" class="logo-button">Aspyr<span>Pathways</span></a>
+    <nav>
+        <ul>
+            <li><a href="connectwithcounselors.html">Connect with Counselors</a></li>
+            <li><a href="dp.html">Diploma Pathways</a></li>
+            <li><a href="sampleschedules.html">Sample Schedules</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+<div class="content-container">
+    <h1>Diploma Pathways</h1>
+    <a href="https://resources.finalsite.net/images/v1686228813/hsek12inus/g3aroo3o5rlrde2d1zvn/Diploma_Pathways.pdf"
+       target="_blank"
+       class="pdf-link">
+        Open Diploma Pathways PDF
+    </a>
+    <a href="https://fhs.hseschools.org/academics/course-guide"
+       target="_blank"
+       class="pdf-link">
+        Visit Course Guides
+    </a>
+    <a href="https://fhs.hseschools.org/student-life/activities-and-clubs-new"
+       target="_blank"
+       class="pdf-link">
+        Explore Clubs
+    </a>
+</div>
+</body>
+</html>
