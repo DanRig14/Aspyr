@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Network Pathways Survey</title>
+    <style>
+         body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        color: #ffffff;
+        background-color: #b1b1b1;
+    }
+
+    /* Sidebar styles */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100vh;
+        background-color: #002f87;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo-button {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #f7f7f7;
+        text-decoration: none;
+        padding: 0.75rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .logo-button span {
+        color: white;
+    }
+
+    header nav {
+        width: 100%;
+    }
+
+    header nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    header nav li {
+        position: relative;
+        padding-left: 1rem;
+    }
+
+    header nav a {
+        color: #FFFFFF;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        position: relative;
+        display: inline-block;
+        padding: 0.5rem 0;
+    }
+
+    header nav a::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #db0032;
+        transition: width 0.3s ease;
+        box-shadow: 0 0 10px #db0032;
+    }
+
+    header nav a:hover::before {
+        width: 100%;
+    }
+
+        .container {
+            margin-left: 380px;
+            position: relative;
+            background: #74747B;
+            border-radius: 100px;
+            margin-top: 30px;
+            margin-right: 30px;
+            padding: 30px;
+            max-width: 900px;
+            width: calc(100% - 310px);
+            box-shadow: 0 6px 25px rgb(204, 78, 0);
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #636569;
+            border-radius: 10px;
+        }
+
+        .question p {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .response-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .response-button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 30%;
+            text-align: center;
+        }
+
+        .response-button:hover {
+            background-color: #be5050;
+        }
+
+        .response-button.selected {
+            background-color: #db0032;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            background-color: #db0032;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background-color: #d32f2f;
+        }
+
+        #results {
+            margin-top: 30px;
+        }
+
+        .network-result {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: #333;
+        }
+
+        .network-result h3 {
+            color: #E71D36;
+            margin-top: 0;
+        }
+
+        .college-info {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        .career-list {
+            columns: 2;
+            margin: 15px 0;
+        }
+
+        .score-bar {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background-color: #E71D36;
+            transition: width 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-button">Aspyr<span>Pathways</span></a>
+        <nav>
+            <ul>
+                <li><a href="connectwithcounselors.html">Connect with Counselors</a></li>
+                <li><a href="dp.html">Diploma Pathways</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Career Network Pathways Survey</h1>
+        <p>This survey is the first step into the start of your high school journey. After you have submitted your results, you will be shown your TOP 3 RESULTS with sample careers and potential colleges to start thinking about, also their programs of what they provide and exclusive notes.</p>
+        <div id="survey-container"></div>
+        <button class="button" onclick="handleSubmit()">Show My Career Matches</button>
+        <div id="results"></div>
+    </div>
+</head>
+<body>
+
+<script>
+const careerNetworks = {
+    "Arts & Communication": {
+        careers: ["Graphic Designer", "Public Relations Specialist", "Digital Media Producer", "Journalist", "Marketing Creative Director"],
+        clubs: ["School newspaper", "Yearbook team", "Art club", "Drama club", "Speech team", "School broadcasts", "Debate club", "School media teams"],
+        colleges: [
+            {
+                name: "Indiana University",
+                location: "Bloomington IN, Indianapolis IN",
+                programs: ["Fine Arts", "Visual Communication Design", "Photography"],
+                requirements: {
+                    gpa: "3.0+",
+                    sat: "Test Optional",
+                    notes: "Strong portfolio recommended. Join your school newspaper, yearbook team, or art club now to build your portfolio. Summer camps like IU's Media School High School Journalism Institute give you a taste of college life. Consider creating a digital portfolio of your creative work starting in 9th grade."
+                }
+            },
+            {
+                name: "Ball State University",
+                location: "Muncie, IN",
+                programs: ["Telecommunications", "Journalism", "Theatre"],
+                requirements: {
+                    gpa: "3.0+",
+                    sat: "Test Optional",
+                    notes: "Portfolio/Audition may be required. Get involved in drama club, speech team, or school broadcasts. Ball State offers Cardinal Journalism Workshop each summer for high schoolers. The university is known for its immersive learning projects where you work with real clients."
+                }
+            },
+            {
+                name: "University of Indianapolis",
+                location: "Indianapolis, IN",
+                programs: ["Communication", "Electronic Media", "Music"],
+                requirements: {
+                    gpa: "3.0+",
+                    sat: "Test Optional",
+                    notes: "Small class sizes with personalized attention. Begin exploring communication by joining debate club or school media teams. UIndy hosts high school media days and music competitions. Their 'Greyhound Connection' events let you experience campus while still in high school."
+                }
+            }
+        ]
+    },
+    "Engineering & Technology": {
+        careers: ["Software Engineer", "Mechanical Engineer", "Data Scientist", "Systems Architect", "Robotics Engineer"],
+        clubs: ["Robotics club", "Coding club", "Math team", "FIRST Robotics", "Science Olympiad", "Computer Science club", "Engineering competitions"],
+        colleges: [
+            {
+                name: "Rose-Hulman Institute of Technology",
+                location: "Terre Haute, IN",
+                programs: ["Computer Science", "Mechanical Engineering", "Software Engineering"],
+                requirements: {
+                    gpa: "3.8+",
+                    sat: "1300-1480",
+                    notes: "Strong math background required. Join robotics club, coding club, or math team now. Take the most challenging math and science courses available. Rose-Hulman's 'Operation Catapult' summer program lets high schoolers experience engineering projects. The school is consistently ranked #1 for undergraduate engineering."
+                }
+            },
+            {
+                name: "Purdue University",
+                location: "West Lafayette IN, Indianapolis IN",
+                programs: ["Engineering", "Computer Science", "Technology"],
+                requirements: {
+                    gpa: "3.5+",
+                    sat: "1190-1410",
+                    notes: "Competitive admission for engineering/Computer Science. Start building technical skills through FIRST Robotics, Science Olympiad, or coding clubs. Purdue offers 'Imagination, Innovation, Discovery, and Design' summer workshops for high schoolers. Begin learning programming languages like Python in your free time."
+                }
+            },
+            {
+                name: "Valparaiso University",
+                location: "Valparaiso, IN",
+                programs: ["Engineering", "Computer Science"],
+                requirements: {
+                    gpa: "3.3+",
+                    sat: "1100+",
+                    notes: "Small class sizes with strong co-op program. Take part in engineering competitions and science fairs. Valpo hosts 'Engineering Previews' where you can explore labs and meet professors. Their unique 'Engineers Without Borders' program starts community service early with technical skills."
+                }
+            }
+        ]
+    },
+    "Medical Network": {
+        careers: ["Registered Nurse", "Physical Therapist", "Medical Laboratory Technician", "Healthcare Administrator", "Pharmacist"],
+        clubs: ["HOSA (Health Occupations Students of America)", "Health science clubs", "Red Cross Club", "Science clubs", "Future Medical Professionals", "Volunteer programs at hospitals"],
+        colleges: [
+            {
+                name: "Indiana University",
+                location: "Bloomington IN, Indianapolis IN",
+                programs: ["Medicine", "Nursing", "Healthcare Administration"],
+                requirements: {
+                    gpa: "3.7+",
+                    sat: "Test Optional",
+                    notes: "Strong science and math background required. Join HOSA (Health Occupations Students of America) if available at your school. Volunteer at hospitals or nursing homes to gain healthcare exposure. IU's 'Mini Medical School' program gives high schoolers hands-on experiences. Focus on biology, chemistry, and anatomy courses."
+                }
+            },
+            {
+                name: "Butler University",
+                location: "Indianapolis, IN",
+                programs: ["Pharmacy", "Healthcare Studies", "Biology"],
+                requirements: {
+                    gpa: "3.5+",
+                    sat: "1170-1350",
+                    notes: "Pre-health focus available with strong pharmacy program. Look for health science clubs or Red Cross Club at school. Butler offers 'Pharmacy Camp' for high school students. Their six-year direct admit PharmD program accepts freshmen directly from high school, so planning early is crucial."
+                }
+            },
+            {
+                name: "Purdue University",
+                location: "West Lafayette IN, Indianapolis IN",
+                programs: ["Nursing", "Pharmacy", "Public Health"],
+                requirements: {
+                    gpa: "3.4+",
+                    sat: "1190-1410",
+                    notes: "Strong science and math background needed. Consider joining science clubs and seeking healthcare volunteering opportunities. Purdue's 'Molecule Makers Lab' summer program introduces pharmacy concepts. Their nursing simulation labs are among the most advanced in the Midwest."
+                }
+            }
+        ]
+    },
+    "Business & Administration": {
+        careers: ["Financial Analyst", "Marketing Manager", "Project Manager", "Business Development Manager", "Investment Banker"],
+        clubs: ["DECA", "BPA (Business Professionals of America)", "Investment clubs", "Junior Achievement", "Entrepreneurship clubs", "School store", "Financial literacy clubs"],
+        colleges: [
+            {
+                name: "Indiana University",
+                location: "Bloomington IN, Indianapolis IN",
+                programs: ["Business Administration", "Finance", "Marketing"],
+                requirements: {
+                    gpa: "3.8+",
+                    sat: "1230-1420",
+                    notes: "Direct admit requirements higher for Kelley School of Business. Join DECA, BPA (Business Professionals of America), or create school fundraisers to gain business experience. IU's 'Young Women's Leadership Institute' and 'Kelley Business Experience' summer programs are excellent for high schoolers. The Kelley School requires separate application."
+                }
+            },
+            {
+                name: "Butler University",
+                location: "Indianapolis, IN",
+                programs: ["Business", "Marketing", "Finance"],
+                requirements: {
+                    gpa: "3.5+",
+                    sat: "1170-1350",
+                    notes: "Internship opportunities available with Indianapolis businesses. Start business clubs or participate in Junior Achievement. Butler's 'Real Business Experience' program gives students startup funding. Their connection to Indianapolis businesses means early internship possibilities, even for freshmen."
+                }
+            },
+            {
+                name: "University of Evansville",
+                location: "Evansville, IN",
+                programs: ["Business Administration", "Accounting", "Economics"],
+                requirements: {
+                    gpa: "3.3+",
+                    sat: "1100+",
+                    notes: "Strong international programs with Harlaxton College in England. Explore entrepreneurship by starting small businesses or joining investment clubs. UE's 'Global Enterprise' program connects students with businesses worldwide. Their 'Career Advantage Program' guarantees either graduate school admission or a job after graduation."
+                }
+            }
+        ]
+    },
+    "Public Service Network": {
+        careers: ["Social Worker", "Urban Planner", "Public Policy Analyst", "Non-profit Manager", "Emergency Management Director"],
+        clubs: ["Student government", "Volunteer groups", "Youth leadership councils", "Peer mediation programs", "Model UN", "Mock trial", "Community service club"],
+        colleges: [
+            {
+                name: "Indiana University",
+                location: "Bloomington, IN, Indianapolis, IN",
+                programs: ["Public Affairs", "Criminal Justice", "Non-profit Management"],
+                requirements: {
+                    gpa: "3.0+",
+                    sat: "Test Optional",
+                    notes: "Service learning opportunities embedded in curriculum. Get involved in student government, volunteer groups, or community service projects. IU's School of Public and Environmental Affairs (SPEA) offers summer programs for high schoolers. Start tracking service hours now - they'll be valuable for applications."
+                }
+            },
+            {
+                name: "Indiana State University",
+                location: "Terre Haute, IN",
+                programs: ["Criminology and Criminal Justice", "Social Work"],
+                requirements: {
+                    gpa: "2.75+",
+                    sat: "Test Optional",
+                    notes: "Community engagement focus with early field experiences. Join youth leadership councils or peer mediation programs. ISU's 'Community Service Learning' program connects students with over 100 agencies. Their 'Police Explorer' programs partner with local law enforcement for early exposure."
+                }
+            },
+            {
+                name: "Ball State University",
+                location: "Muncie, IN",
+                programs: ["Urban Planning", "Political Science", "Social Work"],
+                requirements: {
+                    gpa: "3.0+",
+                    sat: "Test Optional",
+                    notes: "Internship opportunities in government and non-profits. Participate in Model UN, mock trial, or community improvement projects. Ball State's 'Building Better Communities' initiatives let students work with real cities. They offer weekend immersion experiences for high school students interested in public service."
+                }
+            }
+        ]
+    },
+    "Agriculture & Natural Resources": {
+        careers: ["Environmental Scientist", "Agricultural Manager", "Wildlife Biologist", "Conservation Officer", "Sustainable Agriculture Consultant"],
+        clubs: ["4-H", "FFA (Future Farmers of America)", "Environmental clubs", "Conservation projects", "Nature centers", "Outdoor education programs", "Garden club"],
+        colleges: [
+            {
+                name: "Purdue University",
+                location: "West Lafayette IN, Indianapolis IN",
+                programs: ["Agricultural Science", "Environmental Studies", "Natural Resources"],
+                requirements: {
+                    gpa: "3.3+",
+                    sat: "1190-1410",
+                    notes: "Research opportunities available from freshman year. Join 4-H, FFA (Future Farmers of America), or environmental clubs. Purdue's 'Molecular Agriculture Summer Institute' introduces cutting-edge research. Their connections to agriculture industry leaders provide internships throughout Indiana."
+                }
+            },
+            {
+                name: "Ball State University",
+                location: "Muncie, IN",
+                programs: ["Natural Resources and Environmental Management"],
+                requirements: {
+                    gpa: "3.0+",
+                    sat: "Test Optional",
+                    notes: "Field experience opportunities in diverse ecosystems. Participate in conservation projects, nature centers, or outdoor education programs. Ball State's 'Field Station' offers high school programs in environmental science. Their sustainability initiatives have won national recognition and provide student leadership roles."
+                }
+            }
+        ]
+    },
+    "Innovation": {
+        careers: ["Product Manager", "Innovation Consultant", "R&D Specialist", "Technology Entrepreneur", "Design Thinking Consultant"],
+        clubs: ["Invention clubs", "Hackathon participants", "Innovation competitions", "Maker spaces", "Engineering design competitions", "Entrepreneurship club", "App development teams"],
+        colleges: [
+            {
+                name: "Purdue University",
+                location: "West Lafayette IN, Indianapolis IN",
+                programs: ["Innovation and Entrepreneurship", "Design Thinking"],
+                requirements: {
+                    gpa: "3.5+",
+                    sat: "1190-1410",
+                    notes: "Interdisciplinary programs combining technology and business. Join invention clubs, participate in hackathons, or enter innovation competitions. Purdue's 'Foundry' program helps students launch startups while in school. Their 'Innovation Fast Track' program can lead to patentable ideas as early as sophomore year."
+                }
+            },
+            {
+                name: "Indiana University",
+                location: "Bloomington IN, Indianapolis IN",
+                programs: ["Technology Management", "Entrepreneurship"],
+                requirements: {
+                    gpa: "3.3+",
+                    sat: "Test Optional",
+                    notes: "Business and technology focus with startup incubator access. Try creating apps, joining maker spaces, or developing new solutions to school problems. IU's 'Shoemaker Innovation Center' hosts high school idea competitions. Their 'Entrepreneur in Residence' program connects students with successful founders."
+                }
+            },
+            {
+                name: "Rose-Hulman Institute of Technology",
+                location: "Terre Haute, IN",
+                programs: ["Engineering Design", "Software Engineering"],
+                requirements: {
+                    gpa: "3.8+",
+                    sat: "1300-1480",
+                    notes: "Strong technical background combined with entrepreneurial mindset. Explore engineering design competitions or develop independent technology projects. Rose-Hulman's 'Startup Conference' welcomes high school participants. Their 'Rose Innovative Student Entrepreneurs' program has launched multiple successful companies."
+                }
+            }
+        ]
+    }
+};
+
+const questions = [
+   {
+        text: "I enjoy working on creative projects and expressing ideas through various media.",
+        networks: {
+            "Arts & Communication": 2,
+            "Innovation": 1
+        }
+    },
+    {
+        text: "I like solving complex technical problems and understanding how things work.",
+        networks: {
+            "Engineering & Technology": 2,
+            "Innovation": 1
+        }
+    },
+    {
+        text: "I enjoy helping people and making a positive impact in their lives.",
+        networks: {
+            "Public Service Network": 2,
+            "Medical Network": 1
+        }
+    },
+    {
+        text: "I like working with nature and understanding environmental systems.",
+        networks: {
+            "Agriculture & Natural Resources": 2,
+            "Public Service Network": 1
+        }
+    },
+    {
+        text: "I am interested in health, medicine, and scientific research.",
+        networks: {
+            "Medical Network": 2,
+            "Engineering & Technology": 1
+        }
+    },
+    {
+        text: "I enjoy organizing, planning, and managing resources efficiently.",
+        networks: {
+            "Business & Administration": 2,
+            "Innovation": 1
+        }
+    },
+    {
+        text: "I enjoy analyzing data and using technology to solve problems.",
+        networks: {
+            "Engineering & Technology": 2,
+            "Business & Administration": 1
+        }
+    },
+    {
+        text: "I like leading teams and coordinating group efforts.",
+        networks: {
+            "Business & Administration": 2,
+            "Public Service Network": 1
+        }
+    },
+    {
+        text: "I am comfortable working with financial data and making investment decisions.",
+        networks: {
+            "Business & Administration": 2,
+            "Innovation": 1
+        }
+    },
+    {
+        text: "I enjoy conducting research and discovering new information.",
+        networks: {
+            "Medical Network": 2,
+            "Engineering & Technology": 1
+        }
+    },
+    {
+        text: "I am passionate about sustainability and environmental conservation.",
+        networks: {
+            "Agriculture & Natural Resources": 2,
+            "Public Service Network": 1
+        }
+    },
+    {
+        text: "I enjoy solving puzzles and complex logical problems.",
+        networks: {
+            "Engineering & Technology": 2,
+            "Innovation": 1
+        }
+    },
+   {
+        text: "I am drawn to creating visual content like videos, graphics, and websites.",
+        networks: {
+            "Arts & Communication": 2,
+            "Engineering & Technology": 1,
+            "Innovation": 1
+        }
+    },
+    {
+        text: "I am interested in the design and construction of buildings and infrastructure.",
+        networks: {
+            "Engineering & Technology": 2,
+            "Agriculture & Natural Resources": 1
+        }
+    },
+    {
+        text: "I enjoy learning about different cultures and engaging with people from diverse backgrounds.",
+        networks: {
+            "Public Service Network": 2,
+            "Arts & Communication": 1
+        }
+    },
+    {
+        text: "I am fascinated by the study of living organisms and biological processes.",
+        networks: {
+            "Medical Network": 2,
+            "Agriculture & Natural Resources": 1
+        }
+    },
+    {
+        text: "I am interested in learning how to develop new products and services",
+        networks: {
+            "Innovation": 2,
+            "Business & Administration": 1,
+            "Engineering & Technology": 1
+        }
+    },
+    {
+        text: "I want to work directly with people providing care.",
+        networks: {
+            "Medical Network": 2,
+            "Public Service Network": 1
+        }
+    },
+     {
+        text: "I am curious about the way the human body works.",
+        networks: {
+            "Medical Network": 2,
+            "Agriculture & Natural Resources": 1
+        }
+    },
+    {
+        text: "I am interested in managing the finances of a company.",
+        networks: {
+            "Business & Administration": 2,
+            "Engineering & Technology": 1
+        }
+    },
+    {
+        text: "I get satisfaction from organizing events.",
+        networks: {
+            "Business & Administration": 1,
+            "Arts & Communication": 1,
+            "Public Service Network": 2
+        }
+    },
+];
+
+
+function createSurvey() {
+    const container = document.getElementById("survey-container");
+    questions.forEach((question, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question";
+
+        const questionText = document.createElement("p");
+        questionText.textContent = `${index + 1}. ${question.text}`;
+        questionDiv.appendChild(questionText);
+
+        const responseButtonsDiv = document.createElement("div");
+        responseButtonsDiv.className = "response-buttons";
+
+        const responses = {
+            "Agree": 5,
+            "Neutral": 3,
+            "Disagree": 1
+        }; // Response values
+        for (const label in responses) {
+            const value = responses[label];
+            const button = document.createElement("button");
+            button.className = "response-button";
+            button.textContent = label;
+            button.dataset.questionIndex = index; // Store question index
+            button.dataset.value = value;       // Store response value
+
+            button.addEventListener("click", function() {
+                // Remove 'selected' class from all buttons in the same question
+                const buttons = responseButtonsDiv.querySelectorAll(".response-button");
+                buttons.forEach(btn => btn.classList.remove("selected"));
+
+                // Add 'selected' class to the clicked button
+                this.classList.add("selected");
+            });
+            responseButtonsDiv.appendChild(button);
+        }
+
+        questionDiv.appendChild(responseButtonsDiv);
+        container.appendChild(questionDiv);
+    });
+}
+
+function handleSubmit() {
+    const networkScores = {};
+    Object.keys(careerNetworks).forEach(network => {
+        networkScores[network] = 0;
+    });
+
+    questions.forEach((question, index) => {
+        // Find the selected button for this question
+        const questionDiv = document.getElementById("survey-container").children[index];
+        const selectedButton = questionDiv.querySelector(".response-buttons .response-button.selected");
+
+        if (selectedButton) {
+            const value = parseInt(selectedButton.dataset.value); // Parse the value
+
+            // Accumulate network scores based on the question's networks
+            for (const network in question.networks) {
+                networkScores[network] += question.networks[network] * value;
+            }
+        } else {
+            alert(`Please answer question ${index + 1}.`);
+            return; // Stop if a question is unanswered
+        }
+    });
+    // Normalize scores to a percentage
+    let maxPossibleScore = 0;
+    for (const network in careerNetworks) {
+        let networkMax = 0;
+        questions.forEach(question => {
+            if (question.networks[network]) {
+                networkMax += question.networks[network] * 5;
+            }
+        });
+        maxPossibleScore = Math.max(maxPossibleScore, networkMax); //Not needed just to make the code more readable.
+    }
+
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "";
+
+    const sortedNetworks = Object.entries(networkScores)
+        .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
+        .slice(0, 3); // Display top 3 networks
+
+    sortedNetworks.forEach(([network, score]) => {
+        const networkResultDiv = document.createElement("div");
+        networkResultDiv.className = "network-result";
+
+        const networkTitle = document.createElement("h3");
+        networkTitle.textContent = network;
+        networkResultDiv.appendChild(networkTitle);
+
+        //Score Bar
+        const scoreBar = document.createElement("div");
+        scoreBar.className = "score-bar";
+        const percentage = (score / maxPossibleScore) * 100;
+        const scoreFill = document.createElement("div");
+        scoreFill.className = "score-fill";
+        scoreFill.style.width = `${percentage}%`;
+        scoreBar.appendChild(scoreFill);
+        networkResultDiv.appendChild(scoreBar);
+
+        const careersTitle = document.createElement("h4");
+        careersTitle.textContent = "Possible Careers:";
+        networkResultDiv.appendChild(careersTitle);
+
+        const careerList = document.createElement("ul");
+        careerList.className = "career-list";
+        careerNetworks[network].careers.forEach(career => {
+            const careerItem = document.createElement("li");
+            careerItem.textContent = career;
+            careerList.appendChild(careerItem);
+        });
+        networkResultDiv.appendChild(careerList);
+
+        const collegesTitle = document.createElement("h4");
+        collegesTitle.textContent = "Related Colleges:";
+        networkResultDiv.appendChild(collegesTitle);
+
+        careerNetworks[network].colleges.forEach(college => {
+            const collegeInfoDiv = document.createElement("div");
+            collegeInfoDiv.className = "college-info";
+
+            const collegeName = document.createElement("h5");
+            collegeName.textContent = college.name;
+            collegeInfoDiv.appendChild(collegeName);
+
+            const collegeLocation = document.createElement("p");
+            collegeLocation.textContent = `Location: ${college.location}`;
+            collegeInfoDiv.appendChild(collegeLocation);
+
+             const collegePrograms = document.createElement("p");
+            collegePrograms.textContent = `Programs: ${college.programs.join(", ")}`;
+            collegeInfoDiv.appendChild(collegePrograms);
+
+            const collegeRequirements = document.createElement("p");
+            collegeRequirements.textContent = `Requirements: GPA ${college.requirements.gpa}, SAT ${college.requirements.sat}, Notes: ${college.requirements.notes}`;
+            collegeInfoDiv.appendChild(collegeRequirements);
+
+            networkResultDiv.appendChild(collegeInfoDiv);
+        });
+
+        resultsDiv.appendChild(networkResultDiv);
+    });
+}
+
+createSurvey();
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+body{
+    font-family: Sans-serif;
+}
+
+h1{
+       position: relative;
+        transform: translate(-50%);
+        margin-left: 50%;
+        line-height: 100px;
+        text-align: center;
+        font-size: 50px;
+        background-color: black;
+        color: white;
+        height: 100px;
+        opacity: 80%;
+        top:-40px;
+        width: 110%;
+
+}
+
+.course:hover{
+    transform: scale(1.05);
+}
+
+.courses{
+    display:grid;
+    grid-template-columns: 50% 50% 50%;
+    position: relative;
+    transform: translate(-75%);
+    margin-left: 50%;
+}
+
+.course{
+     margin: 10%;
+     text-align: center;
+     transition: transform 0.2s ease-in-out;
+}
+
+.icon{
+        width: 100%;
+        border-radius: 50%;
+        object-fit:cover;
+        border: none;
+        aspect-ratio: 1 / 1;
+        transition: transform 0.2s ease-in-out;
+}
+
+.icon:hover{
+    transform: scale(1.05);
+}
+
+.table{
+    display:grid;
+    grid-template-columns: 25% 25%;
+    position: relative;
+    transform:translate(20%);
+    column-gap: 10%;
+    row-gap: 5%;
+    text-align: center;
+}
+#back{
+    position: absolute;
+    height: 10px;
+    z-index: 3;
+    top: 25px;
+    background: none;
+    border-radius: 20px;
+}
+
+/* Basic Overlay Styling */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease; /* Smooth transition */
+    z-index: 10;
+}
+
+/* Show overlay when targeted */
+.overlay:target {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Content Box with Animation */
+.overlay-content {
+    background: black;
+    padding: 20px;
+    max-width: 1200px;
+    width: 90%;
+    border-radius: 10px;
+    text-align: center;
+    color: #999;
+    animation: slideIn 0.4s ease forwards;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animation Keyframes */
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Additional Styling for Classes in Overlay */
+.overlay-classes {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.overlay-class {
+    text-align: center;
+    width: 30%;
+}
+
+.overlay-image {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.course-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+    display: block; /* Make the entire course div clickable */
+}
+
+.course-link:hover {
+    color: inherit; /* Keep the hover color the same */
+}
+
